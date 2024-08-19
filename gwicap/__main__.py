@@ -3,6 +3,8 @@ from pathlib import Path
 import ctypes
 import importlib.resources
 
+from gwicap.ui import GWUI
+
 VIEWPORT_WIDTH = 800
 DRAW_HEIGHT = 600
  
@@ -34,6 +36,8 @@ def main():
     viewport_width = dpg.get_viewport_client_width()
     viewport_height = dpg.get_viewport_client_height()
 
+    frontend = GWUI()
+
     while dpg.is_dearpygui_running():
         # check if hotstage is connected. If it is, start thread to poll temperature.
         if (
@@ -43,7 +47,7 @@ def main():
             # redraw_windows.
             viewport_width = dpg.get_viewport_client_width()
             viewport_height = dpg.get_viewport_client_height()
-            # frontend.draw_children(viewport_width, viewport_height)
+            frontend.draw_children(viewport_width, viewport_height)
 
         dpg.render_dearpygui_frame()
 
