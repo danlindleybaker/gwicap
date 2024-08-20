@@ -21,6 +21,12 @@ class GWIns:
     def get_v_scale(self, channel):
         self.write(f"CHAN{channel}:SCAL?")
         return float(self.scope.readline())
+    
+    def get_waveforms(self):
+        channel1 = self.get_waveform(1)
+        channel2 = self.get_waveform(2)
+
+        return channel1, channel2
 
     def get_waveform(self, channel):
         v_scale = self.get_v_scale(channel)
