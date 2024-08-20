@@ -5,16 +5,17 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 
 VIEWPORT_WIDTH = 1280
-DRAW_HEIGHT = 850  # titlebar is approximately 40px
+DRAW_HEIGHT = 667  # titlebar is approximately 40px
 VIEWPORT_HEIGHT = DRAW_HEIGHT - 40
 VERTICAL_WIDGET_NUMBER = 4
 HEIGHT_DISCREPANCY = int(VIEWPORT_HEIGHT / VERTICAL_WIDGET_NUMBER)
 
 
 class GWUI:
-    def __init__(self, camera_texture, cam_width, cam_height, save_texture):
+    def __init__(self, camera_texture, cam_width, cam_height, save_texture, excel_texture):
         self.camera_texture = camera_texture
         self.save_texture = save_texture
+        self.excel_texture = excel_texture
         self.cam_width = cam_width  +25
         self.cam_height = cam_height
         self.init_main_window()
@@ -35,6 +36,7 @@ class GWUI:
         ) as self.main_window:
             self.capture_button = dpg.add_image_button(self.camera_texture, label="Capture")
             self.save_button = dpg.add_image_button(self.save_texture, label="Save")
+            self.excel_button = dpg.add_image_button(self.excel_texture, label="excel")
             
 
         with dpg.window(
