@@ -37,6 +37,8 @@ def main():
     save_width, save_height, channels, save_data = dpg.load_image(str(Path(MODULE_PATH / "assets/save.png")))
     excel_width, excel_height, channels, excel_data = dpg.load_image(str(Path(MODULE_PATH / "assets/excel.png")))
 
+
+
     with dpg.texture_registry():
         camera_texture = dpg.add_static_texture(width=cam_width, height=cam_height, default_value=data, tag="camera_texture")
         save_texture = dpg.add_static_texture(width=save_width, height=save_height, default_value=save_data, tag="save_texture")
