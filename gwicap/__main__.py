@@ -33,11 +33,23 @@ def main():
     dpg.bind_font(default_font)
 
     
+    with dpg.theme() as graph_theme:
+        with dpg.theme_component(dpg.mvAll):
+            dpg.add_theme_color(dpg.mvThemeCol_Text, (0, 0 ,0), category=dpg.mvThemeCat_Core)
+
+            dpg.add_theme_color(dpg.mvPlotCol_PlotBg, (255, 255, 255), category=dpg.mvThemeCat_Plots)
+            dpg.add_theme_color(dpg.mvPlotCol_FrameBg, (200, 200, 200), category=dpg.mvThemeCat_Plots)
+            dpg.add_theme_color(dpg.mvPlotCol_InlayText, (0, 0, 0), category=dpg.mvThemeCat_Plots)
+
+    with dpg.theme() as general_theme:
+        with dpg.theme_component(dpg.mvAll):
+            dpg.add_theme_color(dpg.mvThemeCol_Button, [200, 200, 200])
+
+    dpg.bind_theme(general_theme)
+
     cam_width, cam_height, channels, data = dpg.load_image(str(Path(MODULE_PATH / "assets/camera.png")))
     save_width, save_height, channels, save_data = dpg.load_image(str(Path(MODULE_PATH / "assets/save.png")))
     excel_width, excel_height, channels, excel_data = dpg.load_image(str(Path(MODULE_PATH / "assets/excel.png")))
-
-
 
     with dpg.texture_registry():
         camera_texture = dpg.add_static_texture(width=cam_width, height=cam_height, default_value=data, tag="camera_texture")
@@ -61,6 +73,7 @@ def main():
             frontend.capture_button, callback=lambda: get_both_channel_data(scope, frontend)
         )
 
+        dpg.bind_item_theme(frontend.graph,graph_theme)
     while dpg.is_dearpygui_running():
         # check if hotstage is connected. If it is, start thread to poll temperature.
         if (
