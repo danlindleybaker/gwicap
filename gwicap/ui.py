@@ -12,14 +12,17 @@ HEIGHT_DISCREPANCY = int(VIEWPORT_HEIGHT / VERTICAL_WIDGET_NUMBER)
 
 
 class GWUI:
-    def __init__(self, camera_texture, cam_width, cam_height, save_texture, excel_texture):
+    def __init__(self, camera_texture, cam_width, cam_height, save_texture, excel_texture, draw = True):
         self.camera_texture = camera_texture
         self.save_texture = save_texture
         self.excel_texture = excel_texture
         self.cam_width = cam_width  +25
         self.cam_height = cam_height
-        self.init_main_window()
-        self.draw_children(VIEWPORT_WIDTH, DRAW_HEIGHT)
+        self.draw = draw
+
+        if draw: 
+            self.init_main_window()
+            self.draw_children(VIEWPORT_WIDTH, DRAW_HEIGHT)
 
     def draw_children(self, width, height):
         dpg.configure_item(self.main_window, height=height, pos=[0, 0])

@@ -48,12 +48,18 @@ def main():
     viewport_width = dpg.get_viewport_client_width()
     viewport_height = dpg.get_viewport_client_height()
 
-    frontend = GWUI(camera_texture, cam_width, cam_height, save_texture, excel_texture)
     scope = GWIns("COM3")
 
-    dpg.configure_item(
-        frontend.capture_button, callback=lambda: get_both_channel_data(scope, frontend)
-    )
+    if not scope.initiased:
+        with dpg.window():
+            dpg.add_text("Could not initialise the oscilloscope. Please close the software and check connections.")
+        frontend = GWUI(camera_texture, cam_width, cam_height, save_texture, excel_texture, False)
+    else: 
+        frontend = GWUI(camera_texture, cam_width, cam_height, save_texture, excel_texture)
+        
+        dpg.configure_item(
+            frontend.capture_button, callback=lambda: get_both_channel_data(scope, frontend)
+        )
 
     while dpg.is_dearpygui_running():
         # check if hotstage is connected. If it is, start thread to poll temperature.
@@ -64,7 +70,8 @@ def main():
             # redraw_windows.
             viewport_width = dpg.get_viewport_client_width()
             viewport_height = dpg.get_viewport_client_height()
-            frontend.draw_children(viewport_width, viewport_height)
+            if frontend.draw:
+                frontend.draw_children(viewport_width, viewport_height)
 
         dpg.render_dearpygui_frame()
 

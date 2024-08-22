@@ -1,19 +1,25 @@
 import serial
+from serial.serialutil import SerialException
 import matplotlib.pyplot as plt
 
 
 class GWIns:
     def __init__(self, address):
-        self.scope = serial.Serial(
-            address,
-            baudrate=9600,
-            bytesize=8,
-            parity="N",
-            stopbits=1,
-            xonxoff=False,
-            dsrdtr=False,
-            timeout=5,
-        )
+
+        try: 
+            self.scope = serial.Serial(
+                address,
+                baudrate=9600,
+                bytesize=8,
+                parity="N",
+                stopbits=1,
+                xonxoff=False,
+                dsrdtr=False,
+                timeout=5,
+            )
+            self.initiased = True
+        except SerialException:
+            self.initiased = False
 
     def write(self, msg):
         self.scope.write(bytes(msg + "\n", encoding="ascii"))
