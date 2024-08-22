@@ -45,20 +45,24 @@ class GWUI:
             with dpg.plot(
                 anti_aliased=True,
             ) as self.graph:
+                
+                dpg.add_plot_legend()
                 self.results_time_axis = dpg.add_plot_axis(
                     dpg.mvXAxis, label="time", tag="time_axis"
                 )
                 self.results_V_axis = dpg.add_plot_axis(
                     dpg.mvYAxis, label="V", tag="V_axis"
                 )
+
+                
                 # series belong to a y axis. Note the tag name is used in the update
                 # function update_data
 
                 self.results_plot = dpg.add_line_series(
-                    x=[], y=[], label="Temp", parent="V_axis", tag="results_plot"
+                    x=[], y=[], label="Channel 1", parent="V_axis", tag="results_plot"
                 )
                 self.results_plot2 = dpg.add_line_series(
-                    x=[], y=[], label="Temp", parent="V_axis", tag="results_plot2"
+                    x=[], y=[], label="Channel 2", parent="V_axis", tag="results_plot2"
                 )
 
     # def draw_graph(self, x, y):
