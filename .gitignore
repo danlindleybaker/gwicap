@@ -1,5 +1,6 @@
 # output figure
 scope_screenshot.png
+*.xlsx
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
