@@ -1,5 +1,5 @@
 # output figure
-*.png
+scope_screenshot.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
