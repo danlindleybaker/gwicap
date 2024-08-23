@@ -5,10 +5,18 @@ import importlib.resources
 
 from gwicap.ui import GWUI, VIEWPORT_WIDTH, DRAW_HEIGHT
 from gwicap.instrument import GWIns
-from gwicap.utils import get_both_channel_data
+from gwicap.utils import get_both_channel_data, save_screenshot
+
+
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+
 
 
 def main():
+
+    
+
     dpg.create_context()
     ctypes.windll.shcore.SetProcessDpiAwareness(2)
     MODULE_PATH = importlib.resources.files(__package__)
@@ -25,6 +33,14 @@ def main():
 
     font_path = Path(MODULE_PATH / "assets/GeistVF.ttf")
 
+
+    # set Geist as the font for the saved matplotlib figure
+    font_prop = fm.FontProperties(fname=font_path)
+    font_name = font_prop.get_name()
+    fm.fontManager.addfont(font_path)
+    plt.rcParams['font.family'] = font_name
+
+
     with dpg.font_registry():
         default_font = dpg.add_font(font_path, 18 * screensize[1] / 1080)
         title_font = dpg.add_font(font_path, 20 * screensize[1] / 1080)
@@ -39,6 +55,7 @@ def main():
 
             dpg.add_theme_color(dpg.mvPlotCol_PlotBg, (255, 255, 255), category=dpg.mvThemeCat_Plots)
             dpg.add_theme_color(dpg.mvPlotCol_FrameBg, (200, 200, 200), category=dpg.mvThemeCat_Plots)
+            dpg.add_theme_color(dpg.mvPlotCol_LegendBg, (200, 200, 200), category=dpg.mvThemeCat_Plots)
             dpg.add_theme_color(dpg.mvPlotCol_InlayText, (0, 0, 0), category=dpg.mvThemeCat_Plots)
 
     with dpg.theme() as general_theme:
@@ -71,6 +88,10 @@ def main():
         
         dpg.configure_item(
             frontend.capture_button, callback=lambda: get_both_channel_data(scope, frontend)
+        )
+
+        dpg.configure_item(
+            frontend.save_button, callback = save_screenshot, user_data = frontend
         )
 
         dpg.bind_item_theme(frontend.graph,graph_theme)

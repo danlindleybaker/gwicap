@@ -49,13 +49,23 @@ class GWUI:
                 anti_aliased=True,
             ) as self.graph:
                 
-                dpg.add_plot_legend()
+                dpg.add_plot_legend(location = 9)
                 self.results_time_axis = dpg.add_plot_axis(
-                    dpg.mvXAxis, label="time", tag="time_axis"
+                    dpg.mvXAxis, label="time (s)", tag="time_axis"
                 )
                 self.results_V_axis = dpg.add_plot_axis(
-                    dpg.mvYAxis, label="V", tag="V_axis"
+                    dpg.mvYAxis, label="voltage (V)", tag="V_axis"
                 )
+
+                with dpg.theme() as self.channel1_theme:
+                    with dpg.theme_component(dpg.mvLineSeries):
+                        dpg.add_theme_color(dpg.mvPlotCol_Line, (255,0,0), category=dpg.mvThemeCat_Plots)
+                        dpg.add_theme_style(dpg.mvPlotStyleVar_LineWeight, 3, category=dpg.mvThemeCat_Plots)
+
+                with dpg.theme() as self.channel2_theme:
+                    with dpg.theme_component(dpg.mvLineSeries):
+                        dpg.add_theme_color(dpg.mvPlotCol_Line, (0,0,255), category=dpg.mvThemeCat_Plots)
+                        dpg.add_theme_style(dpg.mvPlotStyleVar_LineWeight, 3, category=dpg.mvThemeCat_Plots)
 
                 
                 # series belong to a y axis. Note the tag name is used in the update
@@ -64,10 +74,15 @@ class GWUI:
                 self.results_plot = dpg.add_line_series(
                     x=[], y=[], label="Channel 1", parent="V_axis", tag="results_plot"
                 )
+
                 self.results_plot2 = dpg.add_line_series(
                     x=[], y=[], label="Channel 2", parent="V_axis", tag="results_plot2"
                 )
+                dpg.bind_item_theme(self.results_plot, self.channel1_theme)
+                dpg.bind_item_theme(self.results_plot2, self.channel2_theme)
 
+
+                dpg.output_frame_buffer
     # def draw_graph(self, x, y):
     #     dpi = 500
     #     fig = plt.figure(figsize=(4, 3), dpi=dpi)
