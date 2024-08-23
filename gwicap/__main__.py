@@ -5,7 +5,7 @@ import importlib.resources
 
 from gwicap.ui import GWUI, VIEWPORT_WIDTH, DRAW_HEIGHT
 from gwicap.instrument import GWIns
-from gwicap.utils import get_both_channel_data, save_screenshot
+from gwicap.utils import get_both_channel_data, save_screenshot, make_excel
 
 
 import matplotlib.pyplot as plt
@@ -92,6 +92,9 @@ def main():
 
         dpg.configure_item(
             frontend.save_button, callback = save_screenshot, user_data = frontend
+        )
+        dpg.configure_item(
+            frontend.excel_button, callback = make_excel, user_data = frontend
         )
 
         dpg.bind_item_theme(frontend.graph,graph_theme)
