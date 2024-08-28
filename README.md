@@ -1,6 +1,12 @@
 # GW Instek Screen Capture (gwicap)
 
-![gwicap logo](https://github.com/danlindleybaker/gwicap/blob/65641639f573c77b75765065b707277fcf1ae35b/images/gwicap_logo.svg)
+<p align="center">
+  <picture align="center">
+    <img alt="gwicap logo" src="https://github.com/danlindleybaker/gwicap/blob/65641639f573c77b75765065b707277fcf1ae35b/images/gwicap_logo.svg">
+  </picture>
+</p>
+
+<!-- ![gwicap logo](https://github.com/danlindleybaker/gwicap/blob/65641639f573c77b75765065b707277fcf1ae35b/images/gwicap_logo.svg) -->
 
 This is a simple UI to enable a user to save data from a GW Instek Oscilloscope (tested with a GDS-1102-U). The frontend has been built with [DearPyGUI](https://github.com/hoffstadt/DearPyGui) and serial connection to the oscilloscope is achieved with [PySerial](https://github.com/pyserial/pyserial).
 
