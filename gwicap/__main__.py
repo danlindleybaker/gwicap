@@ -24,8 +24,8 @@ def main():
         title="GW Instek Capture", width=VIEWPORT_WIDTH, height=DRAW_HEIGHT,
     )
 
-    dpg.set_viewport_large_icon(MODULE_PATH / "assets/LCD_icon.ico")
-    dpg.set_viewport_small_icon(MODULE_PATH / "assets/LCD_icon.ico")
+    dpg.set_viewport_large_icon(MODULE_PATH / "assets/gwicap_icon.ico")
+    dpg.set_viewport_small_icon(MODULE_PATH / "assets/gwicap_icon.ico")
     dpg.setup_dearpygui()
     dpg.show_viewport()
     user32 = ctypes.windll.user32
