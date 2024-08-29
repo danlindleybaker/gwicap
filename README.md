@@ -34,6 +34,5 @@ python -m gwicap
 3. Press the Excel button to save an .xlsx of the data.
 
 ## License
-Copyright (c) 2023 University of Leeds and Daniel Baker
 
 Licensed under the [MIT](LICENSE) license
