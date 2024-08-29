@@ -10,7 +10,22 @@
 
 This is a simple UI to enable a user to save data from a GW Instek Oscilloscope (tested with a GDS-1102-U). The frontend has been built with [DearPyGUI](https://github.com/hoffstadt/DearPyGui) and serial connection to the oscilloscope is achieved with [PySerial](https://github.com/pyserial/pyserial).
 
+## Installation
+
+Requires a Python installation (>3.9 - recommended is 3.12)
+
+```shell
+
+git clone https://github.com/danlindleybaker/gwicap
+python -m pip install gwicap
+```
+
 ## Usage
+
+```shell
+
+python -m gwicap
+```
 
 ![Screenshot of gwicap's main window](https://github.com/danlindleybaker/gwicap/blob/02a95c1061c755dbcca644a47101a95cc749dedc/images/gwicap_screenshot.PNG)
 
