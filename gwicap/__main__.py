@@ -11,6 +11,9 @@ from gwicap.utils import get_both_channel_data, save_screenshot, make_excel
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 
+import serial
+from serial.tools import list_ports
+
 
 
 def main():
@@ -76,6 +79,27 @@ def main():
 
     viewport_width = dpg.get_viewport_client_width()
     viewport_height = dpg.get_viewport_client_height()
+
+    # find the scope... 
+
+    ports = list_ports.comports()
+
+    for port in ports:
+        # try to open port, get IDN
+        test = serial.Serial(
+                port.device,
+                baudrate=9600,
+                bytesize=8,
+                parity="N",
+                stopbits=1,
+                xonxoff=False,
+                dsrdtr=False,
+                timeout=5,
+            )
+        test.write(bytes("*IDN?\n", encoding="ascii"))
+        print(test.readline())
+
+
 
     scope = GWIns("COM3")
 
